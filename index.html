@@ -42,6 +42,7 @@
 					x=x+1;
 				}
 				tabla=tabla+'</tbody></table>'
+				$("#your_container").empty();
 				$(tabla).appendTo('.your_container');
 			}
 			function calcularM(){
@@ -60,7 +61,7 @@
 				x=$("input[name=valx]:checked").val();
 				if(l!="" && s!="" && x!=""){
 					b=(x*l)+((x-1)*s);
-					$("#b").text(b+' metro, Longitud minima de bahia');
+					$("#b").text('Longitud minima de bahia: '+b+' metros');
 				}
 			}
 		</script>
@@ -70,26 +71,36 @@
 			<div data-role="header">
 				<h1>Colas</h1>
 			</div><!-- /header -->
-
 			<div role="main" class="ui-content">
-				<div class="ui-corner-all custom-corners">
-			    	<label for="number-pattern">q</label>
-					<input type="number" name="number" pattern="[0-9]*" id="q" value="" placeholder="Vehiculos/hora">
-					<label for="number-pattern">t</label>
-					<input type="number" name="number" pattern="[0-9]*" id="t" value="" placeholder="Intervalo">
-					<button class="ui-btn ui-corner-all ui-shadow ui-btn-inline" onclick="calcularM()">Calcular Poisson</button>
-					<label for="number-pattern" id="m"></label>
-					<div class="your_container"></div>
-					<label for="number-pattern">l:</label>
-					<input type="number" name="number" pattern="[0-9]*" id="l" value="" placeholder="Longitud promedio vehiculos">
-					<label for="number-pattern">s:</label>
-					<input type="number" name="number" pattern="[0-9]*" id="s" value="" placeholder="Separacion entre vehiculos">
-					<a href="#transitionExample" data-transition="slidedown" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup" onclick="calcularB()">Calcular bahía</a>
-	
-					<div data-role="popup" id="transitionExample" class="ui-content" data-theme="a">
-						<p><label for="number-pattern" id="b"></label></p>
+			    	<p><strong>Q</strong> <a href="#popupInfoQ" data-rel="popup" data-transition="pop" class="my-tooltip-btn ui-btn ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-info ui-btn-icon-notext" title="Ayuda">Ayuda</a></p>
+					<div data-role="popup" id="popupInfoQ" class="ui-content" data-theme="a" style="max-width:350px;">
+						<p>Cantidad de vehiculos que llegan al semáforo en una hora. Unidad de medida: <strong>Vehiculos/Hora</strong></p>
 					</div>
-				</div>
+					<input type="number" name="number" pattern="[0-9]*" id="q" value="" placeholder="Vehiculos/Hora">
+					<p><strong>T</strong> <a href="#popupInfoT" data-rel="popup" data-transition="pop" class="my-tooltip-btn ui-btn ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-info ui-btn-icon-notext" title="Ayuda">Ayuda</a></p>
+					<div data-role="popup" id="popupInfoT" class="ui-content" data-theme="a" style="max-width:350px;">
+						<p>Intervalo de tiempo en que el semáforo esta en verde. Unidad de medida: <strong>Segundos</strong></p>
+					</div>
+					<input type="number" name="number" pattern="[0-9]*" id="t" value="" placeholder="Intervalo">
+					<button class="ui-btn ui-corner-all ui-shadow" onclick="calcularM()">Calcular Poisson</button>
+					<p><strong><label for="number-pattern" id="m" style="text-align: center;"></label></strong></p>
+					<div class="your_container" id="your_container"></div>
+					<p><strong>L</strong> <a href="#popupInfoL" data-rel="popup" data-transition="pop" class="my-tooltip-btn ui-btn ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-info ui-btn-icon-notext" title="Ayuda">Ayuda</a></p>
+					<div data-role="popup" id="popupInfoL" class="ui-content" data-theme="a" style="max-width:350px;">
+						<p>Longitud promedio de vehiculos. Unidad de medida: <strong>Metros</strong></p>
+					</div>
+					<input type="number" name="number" pattern="[0-9]*" id="l" value="" placeholder="Longitud promedio vehiculos">
+					<p><strong>S</strong> <a href="#popupInfoS" data-rel="popup" data-transition="pop" class="my-tooltip-btn ui-btn ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-info ui-btn-icon-notext" title="Ayuda">Ayuda</a></p>
+					<div data-role="popup" id="popupInfoS" class="ui-content" data-theme="a" style="max-width:350px;">
+						<p>Separación entre vehiculos. Unidad de medida: <strong>Metros</strong></p>
+					</div>
+					<input type="number" name="number" pattern="[0-9]*" id="s" value="" placeholder="Separacion entre vehiculos">
+					<a href="#myPopup" data-transition="slidedown" class="ui-btn ui-corner-all ui-shadow" data-rel="popup" onclick="calcularB()">Calcular bahía</a>
+					
+					<div data-role="popup" id="myPopup" class="ui-content">
+				      <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+				      <p><strong><label for="number-pattern" id="b"></label></strong></p>
+				    </div>
 			</div><!-- /content -->
 
 			<div data-role="footer">
