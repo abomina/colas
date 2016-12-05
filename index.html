@@ -27,6 +27,7 @@
 				var por=0;
 				x=0;
 				a=0;
+				ban=0;
 				tabla='<table data-role="table" id="table-custom-2" data-mode="columntoggle" class="ui-body-d ui-shadow table-stripe ui-responsive" data-column-btn-theme="b" data-column-btn-text="Columns to display..." data-column-popup-theme="a" style="margin: 0 auto;"><th></th><th data-priority="2">x</th><th>P(x)</th><th data-priority="3">acum</th><th data-priority="3">P(x) 100%</th></tr></thead><tbody>';
 				while (a<99.9) {
 					por=(Math.pow(m,x)*Math.pow(Math.E,-m))/factorial(x);
@@ -37,8 +38,14 @@
 						a=(a/100)+por;
 						a=a*100;
 					}
-					res=100-a.toFixed(2);
-					tabla=tabla+'<tr><td><input type="radio" name="valx" id="valx" value="'+x+'"/></td><th>'+x+'</th><td align="center">'+por.toFixed(2)+'</td><td align="center">'+a.toFixed(2)+'%</td><td align="center">'+res.toFixed(2)+'%</td></tr>';
+					a=a.toFixed(2);
+					res=100-a;
+					if(ban==0 && res<=5){
+						ban=1;
+						tabla=tabla+'<tr><td><input type="radio" name="valx" id="valx" value="'+x+'" checked="checked" /></td><th>'+x+'</th><td align="center">'+por.toFixed(2)+'</td><td align="center">'+a+'%</td><td align="center">'+res.toFixed(2)+'%</td></tr>';
+					}else{
+						tabla=tabla+'<tr><td><input type="radio" name="valx" id="valx" value="'+x+'"/></td><th>'+x+'</th><td align="center">'+por.toFixed(2)+'</td><td align="center">'+a+'%</td><td align="center">'+res.toFixed(2)+'%</td></tr>';
+					}
 					x=x+1;
 				}
 				tabla=tabla+'</tbody></table>'
@@ -94,7 +101,7 @@
 					<div data-role="popup" id="popupInfoS" class="ui-content" data-theme="a" style="max-width:350px;">
 						<p>Separación entre vehiculos. Unidad de medida: <strong>Metros</strong></p>
 					</div>
-					<input type="number" name="number" pattern="[0-9]*" id="s" value="" placeholder="Separacion entre vehiculos">
+					<input type="number" name="number" pattern="[0-9]*" id="s" value="" placeholder="Separación entre vehiculos">
 					<a href="#myPopup" data-transition="slidedown" class="ui-btn ui-corner-all ui-shadow" data-rel="popup" onclick="calcularB()">Calcular bahía</a>
 					
 					<div data-role="popup" id="myPopup" class="ui-content">
